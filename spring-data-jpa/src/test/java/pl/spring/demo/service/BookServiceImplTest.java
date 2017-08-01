@@ -1,7 +1,7 @@
 package pl.spring.demo.service;
 
 import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +11,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.spring.demo.exception.BookNotNullIdException;
 import pl.spring.demo.to.BookTo;
 
-import java.awt.print.Book;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import org.junit.runners.MethodSorters;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "CommonServiceTest-context.xml")
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BookServiceImplTest {
 
     @Autowired
@@ -31,7 +33,7 @@ public class BookServiceImplTest {
     }
 
     @Test
-    public void testShouldFindAllBooks() {
+    public void AtestShouldFindAllBooks() {
         // when
         List<BookTo> allBooks = bookService.findAllBooks();
         // then
@@ -41,8 +43,7 @@ public class BookServiceImplTest {
     }
 
     @Test
-    @Ignore
-    public void testShouldFindAllBooksByTitle() {
+    public void BtestShouldFindAllBooksByTitle() {
         // given
         final String title = "Opium w rosole";
         // when
@@ -53,7 +54,7 @@ public class BookServiceImplTest {
     }
 
     @Test(expected = BookNotNullIdException.class)
-    public void testShouldThrowBookNotNullIdException() {
+    public void CtestShouldThrowBookNotNullIdException() {
         // given
         final BookTo bookToSave = new BookTo();
         bookToSave.setId(22L);
@@ -64,7 +65,7 @@ public class BookServiceImplTest {
     }
     
     @Test
-    public void shouldSaveBookWithNextId(){
+    public void DshouldSaveBookWithNextId(){
     	//given
     	BookTo book = new BookTo();
     	BookTo actual;

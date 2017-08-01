@@ -15,25 +15,25 @@ public class BookIdAdvisor implements MethodBeforeAdvice{
 	private Sequence sequence;
 	
 	@Override
-    public void before(Method method, Object[] objects, Object o) throws Throwable {
+    public void before(Method method, Object[] methodParamethres, Object classContainigMethod) throws Throwable {
 
-        if (hasAnnotation(method, o, NullableBookId.class)) {
-            checkNullId(o, objects[0]);
+        if (hasAnnotation(method, classContainigMethod, NullableBookId.class)) {
+            checkNullId(classContainigMethod, methodParamethres[0]);
         }
     }
 
-    private void checkNullId(Object o, Object book) {
+    private void checkNullId(Object methodParamethers, Object book) {
         if (book instanceof IdAware && ((IdAware) book).getId() == null) {
-        	BookDaoImpl bookImpl = (BookDaoImpl) o;
+        	BookDaoImpl bookImpl = (BookDaoImpl) methodParamethers;
         	((BookTo) book).setId(sequence.nextValue(bookImpl.findAll()));
         }
     }
 
-    private boolean hasAnnotation(Method method, Object o, Class annotationClazz) throws NoSuchMethodException {
-        boolean hasAnnotation = method.getAnnotation(annotationClazz) != null;
+    private boolean hasAnnotation(Method method, Object methodParamethers, Class annotationClass) throws NoSuchMethodException {
+        boolean hasAnnotation = method.getAnnotation(annotationClass) != null;
 
-        if (!hasAnnotation && o != null) {
-            hasAnnotation = o.getClass().getMethod(method.getName(), method.getParameterTypes()).getAnnotation(annotationClazz) != null;
+        if (!hasAnnotation && methodParamethers != null) {
+            hasAnnotation = methodParamethers.getClass().getMethod(method.getName(), method.getParameterTypes()).getAnnotation(annotationClass) != null;
         }
         return hasAnnotation;
     }

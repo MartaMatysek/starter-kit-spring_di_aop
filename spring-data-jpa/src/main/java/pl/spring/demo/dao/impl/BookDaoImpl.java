@@ -25,14 +25,27 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public List<BookTo> findBookByTitle(String title) {
-        return null;
+    	List<BookTo> books = new ArrayList<BookTo>();
+    	for (BookTo book : ALL_BOOKS) {
+    		if (book.findByTitle(title)) {
+    			books.add(book);
+    		}
+        }
+    	return books;
     }
+	
 
-    @Override
+	@Override
     public List<BookTo> findBooksByAuthor(String author) {
-        return null;
+		List<BookTo> books = new ArrayList<BookTo>();
+    	for (BookTo book : ALL_BOOKS) {
+    		if (book.findByAuthor(author)) {
+    			books.add(book);
+    		}
+        }
+    	return books;
     }
-
+    
     @Override
     @NullableId
     @NullableBookId
@@ -42,11 +55,11 @@ public class BookDaoImpl implements BookDao {
     }
 
     private void addTestBooks() {
-        ALL_BOOKS.add(new BookTo(1L, "Romeo i Julia", "Wiliam Szekspir"));
-        ALL_BOOKS.add(new BookTo(2L, "Opium w rosole", "Hanna Ożogowska"));
-        ALL_BOOKS.add(new BookTo(3L, "Przygody Odyseusza", "Jan Parandowski"));
-        ALL_BOOKS.add(new BookTo(4L, "Awantura w Niekłaju", "Edmund Niziurski"));
-        ALL_BOOKS.add(new BookTo(5L, "Pan Samochodzik i Fantomas", "Zbigniew Nienacki"));
-        ALL_BOOKS.add(new BookTo(6L, "Zemsta", "Aleksander Fredro"));
+        ALL_BOOKS.add(new BookTo(1L, "Romeo i Julia", "Wiliam", "Szekspir"));
+        ALL_BOOKS.add(new BookTo(2L, "Opium w rosole", "Hanna", "Ożogowska"));
+        ALL_BOOKS.add(new BookTo(3L, "Przygody Odyseusza", "Jan", "Parandowski"));
+        ALL_BOOKS.add(new BookTo(4L, "Awantura w Niekłaju", "Edmund", "Niziurski"));
+        ALL_BOOKS.add(new BookTo(5L, "Pan Samochodzik i Fantomas", "Zbigniew", "Nienacki"));
+        ALL_BOOKS.add(new BookTo(6L, "Zemsta", "Aleksander", "Fredro"));
     }
-}
+  }
